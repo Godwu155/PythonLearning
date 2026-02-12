@@ -2,6 +2,7 @@ from pathlib import Path
 import json
 import plotly.express as px
 import pandas as pd
+from dash import Dash, dcc, html
 
 path = Path('weather_data/readable_eq_data.geojson')
 # path = Path('weather_data/readable_eq_data.json')
@@ -48,5 +49,11 @@ fig = px.scatter_geo(
     projection="orthographic",  # 地图投影方式，让地图看起来更自然
 
 )
-fig.write_html('weather_data/readable_eq_data.html')
-fig.show()
+# fig.write_html('weather_data/readable_eq_data.html')
+# fig.show()
+app = Dash()
+app.layout = html.Div([
+    dcc.Graph(figure=fig)
+])
+
+app.run(debug=True, use_reloader=False)
