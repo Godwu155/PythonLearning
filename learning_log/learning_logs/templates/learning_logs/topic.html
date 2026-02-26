@@ -1,0 +1,24 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+  <p>主题: {{ topic }}</p>
+
+  <p>记录 (Entries):</p>
+
+  <p>
+    <a href="{% url 'learning_logs:new_entry' topic.id %}">添加新条目</a>
+  </p>
+  <ul>
+    {% for entry in entries %}
+      <li>
+        <p>{{ entry.date_added|date:'Y-m-d H:i' }}</p>
+        <p>{{ entry.text|linebreaks }}</p>
+        <p>
+          <a href="{% url 'learning_logs:edit_entry' entry.id %}">编辑条目</a>
+        </p>
+      </li>
+    {% empty %}
+      <li>目前该主题下还没有任何记录。</li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  <p>登录到您的账户 (Log in to your account)</p>
+
+  <form method="post" action="{% url 'accounts:login' %}">
+    
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+    
+    <button name="submit">登录</button>
+    
+    <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
+  </form>
+
+{% endblock content %}

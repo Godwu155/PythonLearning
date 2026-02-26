@@ -1,0 +1,15 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+  <p>注册新账户 (Register a new account)</p>
+
+  <form method="post" action="{% url 'accounts:register' %}">
+    
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+    
+    <button name="submit">注册 (Register)</button>
+  </form>
+
+{% endblock content %}
